@@ -41,6 +41,8 @@ public class Puissance4<input> {
         int positionPion;
 
         System.out.println();
+
+        for (int x=0;x<42;x++) {
         System.out.println("A vous de jouer Joueur 1 ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6 ?");
 
         //int positionPion correspond à la position du pion dans la colonne choisie par le le joueur
@@ -69,6 +71,12 @@ public class Puissance4<input> {
         System.out.println("0 1 2 3 4 5 6");
         System.out.println();
 
+        //Création des boucles pour vérifier les conditions de victoire. Pour une position donnée, on vérifie la présence des mêmes pions sur les 3 cases adjacentes
+        for (int n =0; n<4;n++)
+            if ((puiss4[n][positionPion] || (joueur1.equals puiss4[n][positionPion]));
+            System.out.println("Victoire!!");
+
+
         //ensuite faire jouer le joueur 2
 
         System.out.println("A vous de jouer Joueur 2 ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6 ?");
@@ -85,9 +93,6 @@ public class Puissance4<input> {
                 break;
             } else continue; }
 
-
-
-
             //Ouverture de la boucle de nos 6 lignes pour affichage du tableau apres MAJ
             for (int k = 0; k < 6; k++) {
                 //Ouverture de la boucle de nos 7 colonnes
@@ -95,7 +100,13 @@ public class Puissance4<input> {
                     //Print de chaque itération de la boucle j
                     System.out.print(puiss4[k][l]);
                 }
-                System.out.println();
+                System.out.println();}
+            System.out.println("0 1 2 3 4 5 6");
+            System.out.println();
+
+            for (int t=0;t<4;t++) {
+                if (puiss4[t][positionPion]==puiss4[t-1][positionPion]==puiss4[t-2][positionPion]==puiss4[t-3][positionPion]);
+            }
             }
             sc.close();
         }
