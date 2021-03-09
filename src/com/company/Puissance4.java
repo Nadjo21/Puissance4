@@ -52,7 +52,7 @@ public class Puissance4<input> {
             sc.nextLine();
 
 
-        //Bloc joueur 1 : boucle pour placer le pion sur la bonne ligne de la colonne choisie par le joueur
+            //Bloc joueur 1 : boucle pour placer le pion sur la bonne ligne de la colonne choisie par le joueur
             for (int z = 5; z >= 0; z--) {
                 if (puiss4[z][positionPion] == ". ") {
                     puiss4[z][positionPion] = joueur1;
@@ -84,15 +84,32 @@ public class Puissance4<input> {
                             puiss4[l][c] == joueur1 &&
                                     puiss4[l][c + 1] == joueur1 &&
                                     puiss4[l][c + 2] == joueur1 &&
-                                    puiss4[l][c + 3] == joueur1) {
-                        victoire=true;
-                        System.out.print("Victoire!! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
+                                    puiss4[l][c + 3] == joueur1 ||
+                            puiss4[l][c] == joueur1 &&
+                                    puiss4[l - 1][c + 1] == joueur1 &&
+                                    puiss4[l - 2][c + 2] == joueur1 &&
+                                    puiss4[l - 3][c + 3] == joueur1)
+                    {
+                        victoire = true;
+                        System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
+                    }
+                }
+            }
+            for (int l = 5; l >= 3; l--) {
+                for (int c = 6; c >=3 ; c--) {
+                    if (puiss4[l][c] == joueur1 &&
+                            puiss4[l - 1][c - 1] == joueur1 &&
+                            puiss4[l - 2][c - 2] == joueur1 &&
+                            puiss4[l - 3][c - 3] == joueur1)
+                    {
+                        victoire = true;
+                        System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
                 }
             }
             System.out.println();
 
-           if(victoire ==true){
+            if (victoire == true) {
                 break;
             }
 
@@ -135,16 +152,33 @@ public class Puissance4<input> {
                             puiss4[l][c] == joueur2 &&
                                     puiss4[l][c + 1] == joueur2 &&
                                     puiss4[l][c + 2] == joueur2 &&
-                                    puiss4[l][c + 3] == joueur2) {
-                        victoire=true;
-                        System.out.print("Victoire!! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
+                                    puiss4[l][c + 3] == joueur2 ||
+                            puiss4[l][c] == joueur1 &&
+                                    puiss4[l - 1][c + 1] == joueur2 &&
+                                    puiss4[l - 2][c + 2] == joueur2 &&
+                                    puiss4[l - 3][c + 3] == joueur2)
+                    {
+                        victoire = true;
+                        System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
+                    }
+                }
+            }
+            for (int l = 5; l >= 3; l--) {
+                for (int c = 6; c >=3 ; c--) {
+                    if (puiss4[l][c] == joueur2 &&
+                            puiss4[l - 1][c - 1] == joueur2 &&
+                            puiss4[l - 2][c - 2] == joueur2 &&
+                            puiss4[l - 3][c - 3] == joueur2)
+                    {
+                        victoire = true;
+                        System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
                 }
             }
             System.out.println();
 
-            if(victoire ==true){
-               break;
+            if (victoire == true) {
+                break;
             }
 
 
