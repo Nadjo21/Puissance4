@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Puissance4<input> {
@@ -16,21 +17,19 @@ public class Puissance4<input> {
         // Déclaration des joueurs, des pions et de la position choisie par le joueur
 
         System.out.println("Indiquez le nom du joueur 1: ");
-        String nomJoueur1=sc.nextLine();
-
+        String nomJoueur1 = sc.nextLine();
         System.out.println("Indiquez le nom du joueur 2: ");
-        String nomJoueur2=sc.nextLine();
+        String nomJoueur2 = sc.nextLine();
 
         String joueur1 = "x ";
         String joueur2 = "o ";
         int positionPion;
-        Boolean victoire = false;
+        boolean victoire = false;
+        boolean possibleDeJouer = true;
 
         System.out.println();
 
         // Creation du tableau 6x7
-
-
         String puiss4[][] = {{". ", ". ", ". ", ". ", ". ", ". ", ". "},
                 {". ", ". ", ". ", ". ", ". ", ". ", ". "},
                 {". ", ". ", ". ", ". ", ". ", ". ", ". "},
@@ -49,34 +48,43 @@ public class Puissance4<input> {
             System.out.println();
         }
         //Affectation d'un index à chaque colonne
+        System.out.println("~~~~~~~~~~~~~");
         System.out.println("0 1 2 3 4 5 6");
         System.out.println();
 
-
         //Début de la partie, démarrage de la "Grande" boucle pour gérer les 42 coups
         for (int x = 1; x < 22; x++) {
-
-            System.out.println("Tour " +x);
-            System.out.println("A vous de jouer "+  nomJoueur1 +" ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6) ?");
+            System.out.println("Tour " + x);
+            System.out.println("A vous de jouer " + nomJoueur1 + " ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6) ?");
 
             //int positionPion correspond à la position du pion dans la colonne choisie par le joueur
             positionPion = sc.nextInt();
             sc.nextLine();
 
-
             //Bloc joueur 1 : boucle pour placer le pion sur la colonne choisie par le joueur
             for (int z = 5; z >= 0; z--) {
-                if (puiss4[z][positionPion] == ". ") {
+                if (puiss4[0][positionPion] == "x " || puiss4[0][positionPion] == "o ") {
+                    possibleDeJouer = false;
+                } else if (puiss4[z][positionPion] == ". ") {
                     puiss4[z][positionPion] = joueur1;
                     break;
-                } else if
-                (puiss4[z][positionPion] != joueur1){
-                                    System.out.println("choix impossible, selectionner une autre colonne");
-            }else if (puiss4[z][positionPion] != joueur2){
-                System.out.println("choix impossible, selectionner une autre colonne");
-                    }
-
+                }
             }
+
+                if (possibleDeJouer == false) {
+                    System.err.println("Choix impossible " + nomJoueur1 + ", sélectionnez une autre colonne");
+                    positionPion = sc.nextInt();
+                    sc.nextLine();
+                    for (int z = 5; z >= 0; z--) {
+                        if (puiss4[0][positionPion] == "x " || puiss4[0][positionPion] == "o ") {
+                            possibleDeJouer = false;
+                        } else if (puiss4[z][positionPion] == ". ") {
+                            puiss4[z][positionPion] = joueur1;
+                            possibleDeJouer=true;
+                            break;
+                        }
+                    }
+                }
 
             //Ouverture de la boucle de nos 6 lignes pour affichage du tableau apres MAJ
             for (int i = 0; i < 6; i++) {
@@ -87,6 +95,7 @@ public class Puissance4<input> {
                 }
                 System.out.println();
             }
+            System.out.println("~~~~~~~~~~~~~");
             System.out.println("0 1 2 3 4 5 6");
             System.out.println();
 
@@ -106,20 +115,18 @@ public class Puissance4<input> {
                             puiss4[l][c] == joueur1 &&
                                     puiss4[l - 1][c + 1] == joueur1 &&
                                     puiss4[l - 2][c + 2] == joueur1 &&
-                                    puiss4[l - 3][c + 3] == joueur1)
-                    {
+                                    puiss4[l - 3][c + 3] == joueur1) {
                         victoire = true;
                         System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
                 }
             }
             for (int l = 5; l >= 3; l--) {
-                for (int c = 6; c >=3 ; c--) {
+                for (int c = 6; c >= 3; c--) {
                     if (puiss4[l][c] == joueur1 &&
                             puiss4[l - 1][c - 1] == joueur1 &&
                             puiss4[l - 2][c - 2] == joueur1 &&
-                            puiss4[l - 3][c - 3] == joueur1)
-                    {
+                            puiss4[l - 3][c - 3] == joueur1) {
                         victoire = true;
                         System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
@@ -132,8 +139,7 @@ public class Puissance4<input> {
             }
 
             //Bloc joueur 2
-
-            System.out.println(nomJoueur2 +", c'est votre tour ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6) ?");
+            System.out.println(nomJoueur2 + ", c'est votre tour ! Où souhaitez-vous placer votre pion (colonne comprise entre 0 et 6) ?");
 
             //int positionPion correspond à la position du pion dans la colonne choisie par le le joueur
             positionPion = sc.nextInt();
@@ -142,11 +148,31 @@ public class Puissance4<input> {
             //resultat du joueur 2
 
             for (int z = 5; z >= 0; z--) {
-                if (puiss4[z][positionPion] == ". ") {
+                if (puiss4[0][positionPion] == "x " || puiss4[0][positionPion] == "o ") {
+                    possibleDeJouer = false;
+                } else if (puiss4[z][positionPion] == ". ") {
                     puiss4[z][positionPion] = joueur2;
                     break;
-                } else continue;
+                }
             }
+
+            System.out.println(possibleDeJouer);
+            System.out.println(puiss4[0][positionPion]);
+
+                if (possibleDeJouer == false) {
+                    System.err.println("Choix impossible " + nomJoueur2 + ", sélectionnez une autre colonne");
+                    positionPion = sc.nextInt();
+                    sc.nextLine();
+                    for (int z = 5; z >= 0; z--) {
+                        if (puiss4[0][positionPion] == "x " || puiss4[0][positionPion] == "o ") {
+                            possibleDeJouer = false;
+                        } else if (puiss4[z][positionPion] == ". ") {
+                            puiss4[z][positionPion] = joueur2;
+                            possibleDeJouer=true;
+                            break;
+                        }
+                    }
+                }
 
             //Ouverture de la boucle de nos 6 lignes pour affichage du tableau apres MAJ
             for (int k = 0; k < 6; k++) {
@@ -157,6 +183,7 @@ public class Puissance4<input> {
                 }
                 System.out.println();
             }
+            System.out.println("~~~~~~~~~~~~~~~");
             System.out.println("0 1 2 3 4 5 6");
             System.out.println();
 
@@ -173,20 +200,18 @@ public class Puissance4<input> {
                             puiss4[l][c] == joueur2 &&
                                     puiss4[l - 1][c + 1] == joueur2 &&
                                     puiss4[l - 2][c + 2] == joueur2 &&
-                                    puiss4[l - 3][c + 3] == joueur2)
-                    {
+                                    puiss4[l - 3][c + 3] == joueur2) {
                         victoire = true;
                         System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
                 }
             }
             for (int l = 5; l >= 3; l--) {
-                for (int c = 6; c >=3 ; c--) {
+                for (int c = 6; c >= 3; c--) {
                     if (puiss4[l][c] == joueur2 &&
                             puiss4[l - 1][c - 1] == joueur2 &&
                             puiss4[l - 2][c - 2] == joueur2 &&
-                            puiss4[l - 3][c - 3] == joueur2)
-                    {
+                            puiss4[l - 3][c - 3] == joueur2) {
                         victoire = true;
                         System.out.print("Victoire !! Bravo !! T'es la meilleure !! \nFIN DE PARTIE");
                     }
@@ -197,8 +222,10 @@ public class Puissance4<input> {
             if (victoire == true) {
                 break;
             }
-                                }
-        System.out.println("Match nul les loosers !!");
+        }
+        if (victoire == false) {
+            System.out.println("Match nul les loosers !!");
+        }
         sc.close();
     }
 }
